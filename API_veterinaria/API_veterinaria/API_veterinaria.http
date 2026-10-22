@@ -1,0 +1,30 @@
+@API_veterinaria_HostAddress = http://localhost:5132
+
+GET {{API_veterinaria_HostAddress}}/api/clientes
+Accept: application/json
+
+###
+GET {{API_veterinaria_HostAddress}}/api/mascotas
+Accept: application/json
+
+### Registrar un cliente (inserta datos si se ejecuta)
+POST {{API_veterinaria_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "cedula": "123456789",
+  "nombre": "Cliente de ejemplo",
+  "correo": "cliente@example.com"
+}
+
+### Registrar una mascota (reemplazar idCliente por un ID existente)
+POST {{API_veterinaria_HostAddress}}/api/mascotas
+Content-Type: application/json
+
+{
+  "nombre": "Luna",
+  "especie": "Perro",
+  "raza": "Mixta",
+  "peso": 5.25,
+  "idCliente": 1
+}

@@ -1,0 +1,8 @@
+@model ErrorViewModel
+@{ ViewData["Title"] = "Error"; }
+<section class="surface error-state">
+    <h1>No se pudo completar la solicitud</h1>
+    <p>Ocurrió un error inesperado. Inténtalo nuevamente.</p>
+    @if (Model.ShowRequestId) { <p class="form-text">Si el problema continúa, indica esta referencia: <code>@Model.RequestId</code>.</p> }
+    <a class="btn btn-success" asp-controller="Home" asp-action="Index">Volver al inicio</a>
+</section>

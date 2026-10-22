@@ -1,0 +1,23 @@
+@model IReadOnlyList<Web_veterinaria.Models.Mascota.mascotaModel>
+@{ ViewData["Title"] = "Consulta de Mascotas"; }
+<header class="page-heading heading-with-action"><div><h1>Consulta de Mascotas</h1><p>Las mascotas registradas y los datos de sus dueños.</p></div>@if (Model.Count > 0) {<a class="btn btn-success" asp-controller="Mascota" asp-action="RegistrarMascotas">Registrar mascota</a>}</header>
+<div asp-validation-summary="ModelOnly" class="validation-summary" role="alert" tabindex="-1"></div>
+@if (Model.Count == 0 && ViewData.ModelState.IsValid)
+{
+    <section class="empty-state surface" aria-labelledby="sin-mascotas"><h2 id="sin-mascotas">No hay mascotas registradas.</h2><p>Registra la primera mascota y aquí podrás consultar sus datos y los de su dueño.</p><a class="btn btn-success" asp-controller="Mascota" asp-action="RegistrarMascotas">Registrar mascota</a></section>
+}
+else if (Model.Count > 0)
+{
+    <div class="table-responsive table-surface" role="region" aria-label="Mascotas registradas" tabindex="0"><table class="table align-middle">
+        <caption>Mascotas registradas y sus dueños</caption>
+        <thead><tr><th scope="col">Cédula del cliente</th><th scope="col">Nombre del cliente</th><th scope="col">Nombre de la mascota</th><th scope="col">Especie</th><th scope="col" class="numeric">Peso (kg)</th></tr></thead>
+        <tbody>@foreach (var mascota in Model)
+        {
+            <tr><td>@mascota.CedulaCliente</td><td>@mascota.NombreCliente</td><td class="pet-name">@mascota.Nombre</td><td>@mascota.Especie</td><td class="numeric">@mascota.Peso?.ToString("0.00")</td></tr>
+        }</tbody>
+    </table></div>
+}
+else
+{
+    <a class="btn btn-outline-secondary" asp-controller="Mascota" asp-action="ConsultarMascotas">Volver a consultar</a>
+}

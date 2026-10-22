@@ -1,0 +1,45 @@
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Veterinaria</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+    <nav class="navbar navbar-expand-lg" aria-label="Menú principal">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Veterinaria<span class="brand-dot" aria-hidden="true"></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link @(controller == "Cliente" ? "active" : "")" aria-current="@(controller == "Cliente" ? "page" : null)" asp-controller="Cliente" asp-action="RegistrarClientes">Registro de Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link @(controller == "Mascota" && action == "RegistrarMascotas" ? "active" : "")" aria-current="@(controller == "Mascota" && action == "RegistrarMascotas" ? "page" : null)" asp-controller="Mascota" asp-action="RegistrarMascotas">Registro de Mascotas</a></li>
+                    <li class="nav-item"><a class="nav-link @(action == "ConsultarMascotas" ? "active" : "")" aria-current="@(action == "ConsultarMascotas" ? "page" : null)" asp-controller="Mascota" asp-action="ConsultarMascotas">Consulta de Mascotas</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container site-content">
+    <p class="welcome">Bienvenido al sistema de la veterinaria.</p>
+    @if (TempData["Exito"] is string mensaje)
+    {
+        <div class="alert alert-success" role="status">@mensaje</div>
+    }
+    <main id="contenido" tabindex="-1">@RenderBody()</main>
+</div>
+    <footer class="site-footer"><div class="container">Veterinaria <span aria-hidden="true">·</span> Práctica 2 <span aria-hidden="true">·</span> Isaac Acuna Leon <span aria-hidden="true">·</span> Progra Avanzada Web </div></footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

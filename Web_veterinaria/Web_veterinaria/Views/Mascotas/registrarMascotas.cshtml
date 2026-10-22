@@ -1,0 +1,24 @@
+@model Web_veterinaria.Models.Mascota.mascotaModel
+@{ ViewData["Title"] = "Registro de Mascotas"; }
+<header class="page-heading"><h1>Registro de Mascotas</h1><p>Registra una mascota y vincúlala con su dueño. Todos los campos son obligatorios.</p></header>
+<form asp-controller="Mascota" asp-action="RegistrarMascotas" method="post" class="formulario surface">
+    <div asp-validation-summary="ModelOnly" class="validation-summary" role="alert" tabindex="-1"></div>
+    <fieldset><legend>Datos de la mascota</legend>
+        <div class="mb-4"><label asp-for="Nombre" class="form-label"></label><input asp-for="Nombre" class="form-control" maxlength="100" aria-describedby="Nombre-mensaje" required /><span id="Nombre-mensaje" asp-validation-for="Nombre" class="field-error"></span></div>
+        <div class="row g-4 mb-4">
+            <div class="col-sm-6"><label asp-for="Especie" class="form-label"></label><input asp-for="Especie" class="form-control" maxlength="100" aria-describedby="especie-ayuda Especie-mensaje" required /><span id="Especie-mensaje" asp-validation-for="Especie" class="field-error"></span></div>
+            <div class="col-sm-6"><label asp-for="Raza" class="form-label"></label><input asp-for="Raza" class="form-control" maxlength="100" aria-describedby="Raza-mensaje" required /><span id="Raza-mensaje" asp-validation-for="Raza" class="field-error"></span></div>
+        </div>
+        <p id="especie-ayuda" class="form-text mb-4">Se permiten hasta dos mascotas por especie en toda la veterinaria.</p>
+        <div class="mb-4"><label asp-for="Peso" class="form-label"></label><input asp-for="Peso" type="number" step="0.01" min="0.01" max="999999.99" class="form-control" aria-describedby="peso-ayuda Peso-mensaje" required /><p id="peso-ayuda" class="form-text">En kilogramos, con hasta dos decimales. Ejemplo: 5.25.</p><span id="Peso-mensaje" asp-validation-for="Peso" class="field-error"></span></div>
+    </fieldset>
+    <fieldset class="owner-section"><legend>Dueño de la mascota</legend>
+        <div class="mb-4"><label asp-for="IdCliente" class="form-label"></label><select asp-for="IdCliente" asp-items="Model.Clientes" class="form-select" aria-describedby="IdCliente-mensaje" required><option value="">Selecciona un cliente</option></select><span id="IdCliente-mensaje" asp-validation-for="IdCliente" class="field-error"></span></div>
+        @if (Model.Clientes.Count == 0 && ViewData.ModelState.IsValid)
+        {
+            <div class="notice" role="status"><p>No hay clientes disponibles. Registra primero al dueño para vincular su mascota.</p><a asp-controller="Cliente" asp-action="RegistrarClientes">Registrar cliente</a></div>
+        }
+    </fieldset>
+    <div class="form-actions"><button class="btn btn-success" type="submit" disabled="@(Model.Clientes.Count == 0)">Registrar mascota</button><a class="btn btn-outline-secondary" asp-controller="Mascota" asp-action="ConsultarMascotas">Consultar mascotas</a></div>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,11 @@
+@model Web_veterinaria.Models.Cliente.clienteModel
+@{ ViewData["Title"] = "Registro de Clientes"; }
+<header class="page-heading"><h1>Registro de Clientes</h1><p>Agrega los datos del dueño. Todos los campos son obligatorios.</p></header>
+<form asp-controller="Cliente" asp-action="RegistrarClientes" method="post" class="formulario surface">
+    <div asp-validation-summary="ModelOnly" class="validation-summary" role="alert" tabindex="-1"></div>
+    <div class="mb-4"><label asp-for="Cedula" class="form-label"></label><input asp-for="Cedula" class="form-control" maxlength="50" aria-describedby="cedula-ayuda Cedula-mensaje" required /><p id="cedula-ayuda" class="form-text">La cédula debe ser única para cada cliente.</p><span id="Cedula-mensaje" asp-validation-for="Cedula" class="field-error"></span></div>
+    <div class="mb-4"><label asp-for="Nombre" class="form-label"></label><input asp-for="Nombre" class="form-control" maxlength="100" autocomplete="name" aria-describedby="Nombre-mensaje" required /><span id="Nombre-mensaje" asp-validation-for="Nombre" class="field-error"></span></div>
+    <div class="mb-4"><label asp-for="Correo" class="form-label"></label><input asp-for="Correo" type="email" class="form-control" maxlength="100" autocomplete="email" aria-describedby="Correo-mensaje" required /><span id="Correo-mensaje" asp-validation-for="Correo" class="field-error"></span></div>
+    <div class="form-actions"><button class="btn btn-success" type="submit">Registrar cliente</button><a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Volver al inicio</a></div>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

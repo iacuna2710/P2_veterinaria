@@ -1,0 +1,12 @@
+# Archivos locales de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Compilación y pruebas .NET
+bin/
+obj/
+TestResults/
+
+# Capturas y otros resultados generados
+/output/

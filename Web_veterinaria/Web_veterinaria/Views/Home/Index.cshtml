@@ -1,0 +1,10 @@
+@{ ViewData["Title"] = "Bienvenida"; }
+<section class="home-intro">
+    <h1>Bienvenido a la veterinaria</h1>
+    <p class="lead">Registra clientes y mascotas, y consulta sus datos desde un solo lugar.</p>
+</section>
+<div class="row g-4 task-grid">
+    <div class="col-md-4"><section class="task-card"><h2>Registro de Clientes</h2><p>Agrega los datos del dueño de una mascota.</p><a class="btn btn-success" asp-controller="Cliente" asp-action="RegistrarClientes">Registrar cliente</a></section></div>
+    <div class="col-md-4"><section class="task-card"><h2>Registro de Mascotas</h2><p>Registra una mascota y selecciona su dueño.</p><a class="btn btn-success" asp-controller="Mascota" asp-action="RegistrarMascotas">Registrar mascota</a></section></div>
+    <div class="col-md-4"><section class="task-card"><h2>Consulta de Mascotas</h2><p>Revisa las mascotas registradas y sus clientes.</p><a class="btn btn-success" asp-controller="Mascota" asp-action="ConsultarMascotas">Consultar mascotas</a></section></div>
+</div>
